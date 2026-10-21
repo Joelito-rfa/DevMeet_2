@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#060a16"/>
+      <stop offset="0.45" stop-color="#121a48"/>
+      <stop offset="1" stop-color="#33298a"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#9aa2ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#9aa2ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow3" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#c084fc" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#c084fc" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots1" width="48" height="48" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity="0.14"/>
+    </pattern>
+    <linearGradient id="card1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="stroke1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.06"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="1500" fill="url(#bg1)"/>
+  <rect width="1200" height="1500" fill="url(#dots1)"/>
+
+  <circle cx="960" cy="250" r="620" fill="url(#glow1)"/>
+  <circle cx="150" cy="1180" r="560" fill="url(#glow2)"/>
+  <circle cx="1090" cy="1010" r="420" fill="url(#glow3)"/>
+
+  <!-- halos secondaires -->
+  <circle cx="600" cy="740" r="430" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="2"/>
+  <circle cx="600" cy="740" r="300" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="2"/>
+
+  <!-- grande fenêtre partagée -->
+  <g transform="rotate(-7 600 760)">
+    <rect x="150" y="470" width="900" height="600" rx="34" fill="url(#card1)" stroke="url(#stroke1)" stroke-width="2"/>
+    <circle cx="204" cy="528" r="10" fill="#ff5f57" fill-opacity="0.85"/>
+    <circle cx="238" cy="528" r="10" fill="#febc2e" fill-opacity="0.85"/>
+    <circle cx="272" cy="528" r="10" fill="#28c840" fill-opacity="0.85"/>
+    <rect x="204" y="576" width="250" height="452" rx="22" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.09"/>
+
+    <!-- avatar + lignes de la liste -->
+    <circle cx="244" cy="622" r="16" fill="#8b93ff" fill-opacity="0.85"/>
+    <rect x="274" y="613" width="118" height="10" rx="5" fill="#ffffff" fill-opacity="0.4"/>
+    <rect x="274" y="631" width="72" height="8" rx="4" fill="#ffffff" fill-opacity="0.18"/>
+    <circle cx="244" cy="686" r="16" fill="#38bdf8" fill-opacity="0.8"/>
+    <rect x="274" y="677" width="132" height="10" rx="5" fill="#ffffff" fill-opacity="0.28"/>
+    <rect x="274" y="695" width="58" height="8" rx="4" fill="#ffffff" fill-opacity="0.16"/>
+    <circle cx="244" cy="750" r="16" fill="#f472b6" fill-opacity="0.75"/>
+    <rect x="274" y="741" width="104" height="10" rx="5" fill="#ffffff" fill-opacity="0.22"/>
+    <rect x="274" y="759" width="80" height="8" rx="4" fill="#ffffff" fill-opacity="0.14"/>
+
+    <!-- zone de dessin -->
+    <rect x="490" y="576" width="512" height="300" rx="22" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.1"/>
+    <rect x="534" y="618" width="150" height="58" rx="14" fill="#8b93ff" fill-opacity="0.28" stroke="#a5adff" stroke-opacity="0.5"/>
+    <rect x="712" y="640" width="118" height="40" rx="12" fill="#ffffff" fill-opacity="0.07" stroke="#ffffff" stroke-opacity="0.16"/>
+    <path d="M700 676 h-24" stroke="#ffffff" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round"/>
+    <path d="M676 676 l10 -12" stroke="#ffffff" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="884" cy="756" r="46" fill="none" stroke="#38bdf8" stroke-opacity="0.7" stroke-width="4"/>
+    <path d="M560 800 q120 -60 260 0 t160 -30" fill="none" stroke="#f472b6" stroke-opacity="0.6" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- barres de progression -->
+    <rect x="490" y="908" width="512" height="14" rx="7" fill="#ffffff" fill-opacity="0.08"/>
+    <rect x="490" y="908" width="322" height="14" rx="7" fill="#8b93ff" fill-opacity="0.9"/>
+    <rect x="490" y="950" width="360" height="10" rx="5" fill="#ffffff" fill-opacity="0.16"/>
+    <rect x="490" y="978" width="240" height="10" rx="5" fill="#ffffff" fill-opacity="0.1"/>
+  </g>
+
+  <!-- curseurs collaborateurs -->
+  <g>
+    <path d="M0 0 L20 48 L26 28 L46 22 Z" transform="translate(360 1020)" fill="#38bdf8"/>
+    <rect x="386" y="1036" width="96" height="34" rx="10" fill="#38bdf8" fill-opacity="0.9"/>
+  </g>
+  <g>
+    <path d="M0 0 L20 48 L26 28 L46 22 Z" transform="translate(792 566)" fill="#f472b6"/>
+    <rect x="818" y="582" width="86" height="34" rx="10" fill="#f472b6" fill-opacity="0.9"/>
+  </g>
+
+  <!-- carte flottante -->
+  <g transform="rotate(9 330 1220)">
+    <rect x="140" y="1090" width="380" height="230" rx="30" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2"/>
+    <circle cx="196" cy="1148" r="22" fill="#8b93ff"/>
+    <rect x="234" y="1134" width="150" height="12" rx="6" fill="#ffffff" fill-opacity="0.45"/>
+    <rect x="234" y="1156" width="96" height="10" rx="5" fill="#ffffff" fill-opacity="0.2"/>
+    <rect x="180" y="1200" width="200" height="12" rx="6" fill="#ffffff" fill-opacity="0.16"/>
+    <rect x="180" y="1230" width="280" height="12" rx="6" fill="#ffffff" fill-opacity="0.12"/>
+    <rect x="180" y="1260" width="140" height="12" rx="6" fill="#ffffff" fill-opacity="0.1"/>
+  </g>
+
+  <!-- point d'accent -->
+  <circle cx="1010" cy="1090" r="12" fill="#c084fc"/>
+  <circle cx="1010" cy="1090" r="30" fill="#c084fc" fill-opacity="0.18"/>
+</svg>

@@ -1,0 +1,121 @@
+CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(32) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  display_name VARCHAR(64) NOT NULL,
+  avatar_url VARCHAR(255) NULL,
+  bio VARCHAR(500) NULL,
+  preferred_status ENUM('online','idle','dnd','invisible') NOT NULL DEFAULT 'online',
+  custom_status VARCHAR(128) NULL,
+  accent_color VARCHAR(16) NOT NULL DEFAULT '#6366f1',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  last_seen_at DATETIME NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS rooms (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  type ENUM('room','dm') NOT NULL DEFAULT 'room',
+  name VARCHAR(64) NOT NULL,
+  description VARCHAR(255) NULL,
+  icon VARCHAR(32) NULL,
+  color VARCHAR(16) NOT NULL DEFAULT '#6366f1',
+  category VARCHAR(32) NULL,
+  is_private TINYINT(1) NOT NULL DEFAULT 1,
+  owner_id INT UNSIGNED NULL,
+  dm_key VARCHAR(64) NULL UNIQUE,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_rooms_owner FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS room_members (
+  room_id INT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NOT NULL,
+  role ENUM('owner','admin','member') NOT NULL DEFAULT 'member',
+  joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  last_read_message_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  last_delivered_message_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  starred TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (room_id, user_id),
+  INDEX idx_members_user (user_id),
+  CONSTRAINT fk_members_room FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
+  CONSTRAINT fk_members_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS messages (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  room_id INT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NULL,
+  type ENUM('text','system') NOT NULL DEFAULT 'text',
+  content TEXT NOT NULL,
+  attachment JSON NULL,
+  reply_to_id BIGINT UNSIGNED NULL,
+  edited_at DATETIME NULL,
+  deleted_at DATETIME NULL,
+  created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  INDEX idx_messages_room (room_id, id),
+  CONSTRAINT fk_messages_room FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
+  CONSTRAINT fk_messages_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS message_reactions (
+  message_id BIGINT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NOT NULL,
+  icon VARCHAR(32) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (message_id, user_id, icon),
+  CONSTRAINT fk_reactions_message FOREIGN KEY (message_id) REFERENCES messages(id) ON DELETE CASCADE,
+  CONSTRAINT fk_reactions_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS invites (
+  code VARCHAR(16) NOT NULL PRIMARY KEY,
+  room_id INT UNSIGNED NOT NULL,
+  created_by INT UNSIGNED NULL,
+  expires_at DATETIME NULL,
+  max_uses INT NULL,
+  uses INT NOT NULL DEFAULT 0,
+  revoked TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_invites_room (room_id),
+  CONSTRAINT fk_invites_room FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
+  CONSTRAINT fk_invites_user FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS whiteboards (
+  room_id INT UNSIGNED NOT NULL PRIMARY KEY,
+  data LONGTEXT NOT NULL,
+  locked TINYINT(1) NOT NULL DEFAULT 0,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  updated_by INT UNSIGNED NULL,
+  CONSTRAINT fk_wb_room FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS whiteboard_versions (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  room_id INT UNSIGNED NOT NULL,
+  data LONGTEXT NOT NULL,
+  label VARCHAR(100) NOT NULL,
+  element_count INT NOT NULL DEFAULT 0,
+  created_by INT UNSIGNED NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_wbv_room (room_id, created_at),
+  CONSTRAINT fk_wbv_room FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
+  CONSTRAINT fk_wbv_user FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS notifications (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  type VARCHAR(32) NOT NULL,
+  room_id INT UNSIGNED NULL,
+  actor_id INT UNSIGNED NULL,
+  message_id BIGINT UNSIGNED NULL,
+  content VARCHAR(255) NULL,
+  read_at DATETIME NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_notif_user (user_id, created_at),
+  CONSTRAINT fk_notif_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_notif_room FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE,
+  CONSTRAINT fk_notif_actor FOREIGN KEY (actor_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

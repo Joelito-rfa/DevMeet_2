@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#150819"/>
+      <stop offset="0.5" stop-color="#3b1259"/>
+      <stop offset="1" stop-color="#7b2168"/>
+    </linearGradient>
+    <radialGradient id="glow3a" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f472b6" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow3b" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bars3" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#f9a8d4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.95"/>
+    </linearGradient>
+    <pattern id="dots3" width="52" height="52" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#ffffff" fill-opacity="0.12"/>
+    </pattern>
+    <linearGradient id="ring3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="1500" fill="url(#bg3)"/>
+  <rect width="1200" height="1500" fill="url(#dots3)"/>
+  <circle cx="600" cy="940" r="700" fill="url(#glow3a)"/>
+  <circle cx="240" cy="260" r="520" fill="url(#glow3b)"/>
+
+  <!-- ondes concentriques -->
+  <g fill="none" stroke="url(#ring3)" stroke-width="2">
+    <circle cx="600" cy="1000" r="180"/>
+    <circle cx="600" cy="1000" r="300"/>
+    <circle cx="600" cy="1000" r="440"/>
+    <circle cx="600" cy="1000" r="600"/>
+  </g>
+
+  <!-- forme d'onde -->
+  <g stroke="url(#bars3)" stroke-linecap="round" stroke-width="18">
+    <path d="M356 1000 v-46"/>
+    <path d="M404 1000 v-104"/>
+    <path d="M452 1000 v-66"/>
+    <path d="M500 1000 v-188"/>
+    <path d="M548 1000 v-124"/>
+    <path d="M596 1000 v-268"/>
+    <path d="M644 1000 v-152"/>
+    <path d="M692 1000 v-212"/>
+    <path d="M740 1000 v-96"/>
+    <path d="M788 1000 v-148"/>
+    <path d="M836 1000 v-58"/>
+    <path d="M884 1000 v-80"/>
+  </g>
+
+  <!-- participants flottants -->
+  <g>
+    <circle cx="292" cy="640" r="60" fill="#ffffff" fill-opacity="0.09" stroke="#ffffff" stroke-opacity="0.24" stroke-width="2"/>
+    <circle cx="292" cy="640" r="40" fill="#f472b6" fill-opacity="0.55"/>
+    <circle cx="292" cy="640" r="82" fill="none" stroke="#f472b6" stroke-opacity="0.45" stroke-width="3"/>
+
+    <circle cx="912" cy="520" r="52" fill="#ffffff" fill-opacity="0.09" stroke="#ffffff" stroke-opacity="0.2" stroke-width="2"/>
+    <circle cx="912" cy="520" r="34" fill="#a78bfa" fill-opacity="0.6"/>
+
+    <circle cx="1010" cy="856" r="44" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2"/>
+    <circle cx="1010" cy="856" r="28" fill="#38bdf8" fill-opacity="0.55"/>
+
+    <circle cx="196" cy="1080" r="38" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2"/>
+    <circle cx="196" cy="1080" r="24" fill="#fbbf24" fill-opacity="0.6"/>
+  </g>
+
+  <!-- liaisons -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2" stroke-dasharray="8 10">
+    <path d="M330 686 q120 120 220 200"/>
+    <path d="M886 552 q-80 140 -90 240"/>
+    <path d="M994 890 q-120 40 -180 60"/>
+    <path d="M226 1052 q140 -30 210 -10"/>
+  </g>
+
+  <!-- cartes de salon -->
+  <g transform="rotate(-4 330 300)">
+    <rect x="150" y="170" width="380" height="176" rx="28" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2"/>
+    <circle cx="208" cy="230" r="20" fill="#3fb950"/>
+    <rect x="244" y="216" width="164" height="12" rx="6" fill="#ffffff" fill-opacity="0.42"/>
+    <rect x="244" y="240" width="104" height="10" rx="5" fill="#ffffff" fill-opacity="0.18"/>
+    <rect x="182" y="288" width="120" height="26" rx="13" fill="#ffffff" fill-opacity="0.12"/>
+    <rect x="316" y="288" width="76" height="26" rx="13" fill="#ffffff" fill-opacity="0.12"/>
+  </g>
+
+  <circle cx="600" cy="1290" r="14" fill="#ffffff" fill-opacity="0.7"/>
+  <circle cx="600" cy="1290" r="44" fill="#ffffff" fill-opacity="0.08"/>
+</svg>
